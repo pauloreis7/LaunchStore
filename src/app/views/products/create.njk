@@ -8,15 +8,17 @@
 
             <div class="header">
 
-                <h3>Cadastrar novo Produto</h3>
+                <h3>Cadastrar novo Produto {{ productId }}</h3>
 
             </div>
 
             <article class="fields">
 
-                {% include 'products/field.njk' %}
+                {% include 'products/fields.njk' %}
 
             </article>
+
+            <button class="button" type="submit">Salvar</button>
 
         </form>
 
