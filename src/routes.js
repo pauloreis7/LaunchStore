@@ -10,12 +10,14 @@ routes.get('/', function (req, res) {
     return res.render("layout")
 })
 
+routes.get("/ads/create", function (req, res) {
+    return res.redirect("/products/create")
+})
+
 routes.get("/products/create", products.create)
 
 routes.post("/products", products.post)
 
-routes.get("/ads/create", function (req, res) {
-    return res.redirect("/products/create")
-})
+routes.get("/products/:id/edit", products.edit)
 
 module.exports = routes

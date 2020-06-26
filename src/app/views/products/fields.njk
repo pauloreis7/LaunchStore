@@ -51,7 +51,9 @@
 
     <div>
 
-        <input type="number" name="price" value="{{ product.price }}" placeholder="Preço R$" min="0" />
+        <input name="price" value="{{ product.price }}" placeholder="Preço R$"
+            onkeydown="Mask.apply(this, 'formatBRL')"
+        />
 
     </div>
 
