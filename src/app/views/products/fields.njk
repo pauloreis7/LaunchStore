@@ -6,6 +6,8 @@
 
         <select name="category_id">
 
+            <option value="">Escolha uma categoria para o produto</option>
+
             {% for category in categories %}
 
                 <option value="{{ category.id }}" 
@@ -59,7 +61,7 @@
 
     {% if product.old_price %}
 
-        <input type="hidden" name="old_price" value="{{ price.old_price }}" />
+        <input type="hidden" name="old_price" value="{{ product.old_price }}" />
 
     {% endif %}
 
@@ -77,7 +79,7 @@
 
 </div>
 
-{% if product.status %}
+{% if (product.status == '1') or (product.status == 0) %}
 
     <div class="item">
 
@@ -87,13 +89,17 @@
 
             <span>
 
-                <input type="radio" name="status" value="1" {% if product.status == "1" %} checked {% endif %} />Sim
+                <label for="available">
+                    <input type="radio" name="status" id="available" value="1" {% if product.status == "1" %} checked {% endif %} />Sim
+                </label>
 
             </span>
 
             <span>
 
-                <input type="radio" name="status" value="0" {% if product.status == "0" %} checked {% endif %} />Não
+                <label for="unvailable">
+                    <input type="radio" name="status" id="unvailable" value="0" {% if product.status == "0" %} checked {% endif %} />Não
+                </label>
                 
             </span>
         </div>

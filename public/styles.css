@@ -240,10 +240,11 @@ form .item:nth-child(6) > div {
 
 form .item input[type="radio"] {
     width: 20px;
+    margin-right: 4px;
 }
 
 form .item span {
-    padding: 8px 16px;
+    padding: 8px 8px;
     margin: 8px 8px 0 0;
 
     background-color: var(--primary-color);

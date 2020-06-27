@@ -56,5 +56,35 @@ module.exports = {
         const categories = results.rows
 
         return res.render("products/edit", { product, categories })
+    },
+
+    async put (req, res) {
+        
+        const keys = Object.keys(req.body)
+
+        for (key of keys) {
+           if (req.body[key] == "") {
+                return res.send("Porfavor, preencha todos os campos!")
+            } 
+        }
+
+        req.body.price = req.body.price.replace(/\D/g, "")
+
+        if (req.body.price != req.body.old_price) {
+            const product = await Product.find(req.body.id)
+            
+            req.body.old_price = product.rows[0].old_price
+        }        
+
+        await Product.update(req.body)
+
+        return res.redirect(`/products/${ req.body.id }/edit`)
+    },
+
+    async delete (req, res) {
+
+        await Product.delete(req.body.id)
+
+        return res.redirect("/")
     }
 }
