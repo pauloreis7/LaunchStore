@@ -30,7 +30,7 @@ const PhotosUpload = {
         const { files: filesList } = event.target
         PhotosUpload.input = event.target
         
-        if(PhotosUpload.LimitValidations(event)) return        
+        if(PhotosUpload.LimitValidations(event)) return
 
         Array.from(filesList).forEach( file => {
             
@@ -80,8 +80,9 @@ const PhotosUpload = {
     LimitValidations(event) {
 
         const { uploadLimit, input } = PhotosUpload
+        const { files: filesList } = input
 
-        if (input.files.length > uploadLimit) {
+        if (filesList.length > uploadLimit || PhotosUpload.files.length + filesList.length > 6) {
             alert(`Selecione no máximo ${ uploadLimit } fotos!!`)
 
             event.preventDefault()

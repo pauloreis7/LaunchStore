@@ -1,5 +1,6 @@
 const Category = require('../models/Category')
 const Product = require('../models/Product')
+const File = require('../models/File')
 
 const { formatPrice } = require('../../lib/utils')
 
@@ -34,10 +35,14 @@ module.exports = {
             }
         }
 
+        if (req.files.lenght == 0) return res.send("Por favor coloque pelo menos uma imagem!!")
+
         let results = await Product.create(req.body)
         const productId = results.rows[0].id
 
-        return res.redirect(`products/${ productId }/edit`)
+        console.log(req.files)
+
+        // return res.redirect(`products/${ productId }/edit`)
     },
 
     async edit (req, res) {
