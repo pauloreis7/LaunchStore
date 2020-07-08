@@ -320,3 +320,37 @@ form .item #photos_preview img {
 
     border-radius: 6px;
 }
+
+#photos_preview .photo {
+    position: relative;
+}
+
+#photos_preview .photo:hover img {
+    filter: brightness(60%);
+}
+
+#photos_preview .photo i {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    color: #fff4f4;
+    
+    padding: 4px;
+
+    border-radius: 6px;
+    font-size: 28px;
+    cursor: pointer;
+
+    opacity: 0;
+}
+
+#photos_preview .photo:hover i {
+    opacity: 1;
+
+    transition: 250ms;
+}
+
+#photos_preview .photo i:hover {
+    color: rgba(255, 49, 49, 0.938);
+}
