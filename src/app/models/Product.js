@@ -39,6 +39,12 @@ module.exports = {
         return db.query(`SELECT * FROM products WHERE id = ${ id }`)
     },
 
+    file(id) {
+        
+        return db.query(`SELECT * FROM files WHERE products_id = ${ id }`)
+
+    },
+
     update(data) {
 
         const query = `
