@@ -49,7 +49,7 @@ const PhotosUpload = {
 
             reader.readAsDataURL(file)
         })
-        
+
         PhotosUpload.PhotosCount()
 
         PhotosUpload.input.files = PhotosUpload.getAllFiles()
@@ -98,7 +98,6 @@ const PhotosUpload = {
         PhotosUpload.files.forEach(file => dataTransfer.items.add(file))
 
         return dataTransfer.files
-
     },
 
     RemovePhoto (event) {
@@ -109,14 +108,29 @@ const PhotosUpload = {
         PhotosUpload.files.splice(index, 1)
         
         PhotosUpload.PhotosCount()
-        
+
         PhotosUpload.input.files = PhotosUpload.getAllFiles()
 
         photoContainer.remove()
     },
 
-    PhotosCount () {
-        const totalImages = PhotosUpload.files.length
-        document.querySelector('.images_title').textContent = `Imagens (${ totalImages })`
+    PhotosCount (total) {
+        const photosTotal = PhotosUpload.files.length
+
+        document.querySelector('.images_title').textContent = `Imagens (${ photosTotal })`
+    },
+
+    removeOldPhoto (event) {
+        const photoContainer = event.target.parentNode
+
+        if(photoContainer.id) {
+            const removedFiles = document.querySelector("input[name='removed_files']")
+
+            if (removedFiles) {
+                removedFiles.value += `${ photoContainer.id },`
+            }
+        }
+        
+        photoContainer.remove()
     }
 }
