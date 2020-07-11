@@ -46,6 +46,10 @@ module.exports = {
         return res.redirect(`products/${ productId }/edit`)
     },
 
+    show (req, res) {
+        return res.render("products/show")
+    },
+
     async edit (req, res) {
 
         let { id } = req.params
@@ -63,6 +67,7 @@ module.exports = {
 
         results = await Product.file(id)
         let files = results.rows
+
         files = files.map(file => ({ ...file,
             src: `${ req.protocol }://${ req.headers.host }${ file.path.replace("public", "") }`
         }))
@@ -80,12 +85,17 @@ module.exports = {
             } 
         }
 
+        if (req.files.length != 0) {
+            const newFilesPromise = req.files.map(file => File.create({ ...file, product_id: req.body.id }))
+            await Promise.all(newFilesPromise)
+        }
+        
         if (req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",")
-            const lastIndex = req.body.removed_files.lenght - 1
+            const lastIndex = removedFiles.length - 1
             removedFiles.splice(lastIndex, 1)
 
-            const promiseFiles = removed_files.map(id => File.delete(id))
+            const promiseFiles = removedFiles.map(id => File.delete(id))
 
             await Promise.all(promiseFiles)
         }

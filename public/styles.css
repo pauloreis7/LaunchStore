@@ -234,7 +234,7 @@ form .item textarea {
     font-family: 'Roboto', sans-serif;
 }
 
-form .item:nth-child(6) > div {
+form .item:nth-child(7) > div {
     display: flex;
 }
 
