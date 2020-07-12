@@ -7,35 +7,88 @@
 
         <div class="gallery">
 
-            <img src="http://placehold.it/500x500?text=FOTO DO PRODUTO" alt="Nome do produto" />
+            <div class="highlight">
+
+                {% if not files[0] %}
+
+                    <img src="http://placehold.it/500x500?text=Produto sem preço" />
+
+                {% else %}
+
+                    <img src="{{ files[0].src }}" alt="{{ files[0].name }}" />
+
+                {% endif %}
+
+            </div>
+
+            <div class="gallery-preview">
+
+                {% for image in files %}
+
+                    <img 
+                        src="{{ image.src }}" 
+                        alt="{{ image.name }}" 
+
+                        {% if loop.index0 == 0 %}
+
+                            class="active"
+
+                        {% endif %}
+
+                        onclick="ImageGallery.setImage(event)"
+                    />
+                
+                {% endfor %}
+                
+            </div>
 
         </div>
 
         <article class="info">
 
-            <h1>Título do produto</h1>
+            <h1>{{ product.name }}</h1>
 
             <div class="published">
 
-                Publicado em 12/7 às 15h
+                Publicado em {{ product.published.birthDate }} às {{ product.published.hour }}
 
             </div>
 
             <div class="description">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, aperiam eligendi nihil voluptatibus repudiandae tenetur, dolore magni maiores temporibus iusto reprehenderit sapiente officiis explicabo, distinctio quaerat sequi deserunt molestiae. Ex?
+                
+                {{ product.description }}
+                
             </div>
 
             <div class="price-buy">
 
                 <div class="price">
 
-                    R$29,40
+                   {{ product.price }}
+
+                   {% if product.price !== product.old_price %}
+
+                        <span class="old">{{ product.old_price }}</span>
+
+                   {% endif %}
 
                 </div>
 
                 <div class="buy">
 
-                    <button class="button">Comprar</button>
+                    {% if product.status == 0 %}
+
+                        <p class="unavailable">Produto indisponível :(</p>
+
+                        {% elseif product.quantity == 0 %}
+
+                            <p class="unavailable">Fora de estoque :(</p>
+
+                        {% else %}
+
+                            <button class="button">Comprar</button>
+
+                    {% endif %}
                     
                 </div>
 
