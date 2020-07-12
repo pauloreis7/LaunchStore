@@ -147,5 +147,21 @@ const ImageGallery = {
         target.classList.add('active')
 
         ImageGallery.highlight.src = target.src
+        LightBox.image.src = target.src
     },
+}
+
+const LightBox = {
+    target: document.querySelector('.lightbox-target'),
+    image: document.querySelector('.lightbox-target img'),
+
+    open() {
+        LightBox.target.style.opacity = 1
+        LightBox.target.style.top = 0
+    },
+
+    close() {
+        LightBox.target.style.opacity = 0
+        LightBox.target.style.top = "-100%"
+    }
 }
