@@ -4,11 +4,10 @@ const routes = express.Router()
 const multer = require('./app/middlewares/multer')
 
 const products = require('./app/controllers/products')
+const home = require('./app/controllers/home')
 
 
-routes.get('/', function (req, res) {
-    return res.render("layout")
-})
+routes.get('/', home.index)
 
 routes.get('/ads/create', function (req, res) {
     return res.redirect('/products/create')

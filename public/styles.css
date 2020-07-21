@@ -48,7 +48,7 @@ body {
 
     background-color: var(--primary-color);
     color: white;
-    box-shadow: 2px 2px 8px -2px var(--primary-color);
+    box-shadow: 2px 2px 5px -2px var(--primary-color);
 
     border-radius: 4px;
     font-weight: bold;
@@ -66,7 +66,7 @@ body {
 
 .button.edit {
     background-color: var(--secondary-color);
-    box-shadow: 2px 2px 8px -2px var(--secondary-color);
+    box-shadow: 2px 2px 5px -2px var(--secondary-color);
 }
 
 .button.delete {
@@ -337,8 +337,6 @@ form .item #photos_preview img {
     top: 0;
     right: 0;
 
-    color: #fff4f4;
-    
     padding: 4px;
 
     border-radius: 6px;
@@ -350,12 +348,14 @@ form .item #photos_preview img {
 
 #photos_preview .photo:hover i {
     opacity: 1;
+    color: rgba(255, 49, 49, 0.938);
+
 
     transition: 250ms;
 }
 
 #photos_preview .photo i:hover {
-    color: rgba(255, 49, 49, 0.938);
+    filter: brightness(90%);
 }
 
 /* PRODUCT VIEW */
@@ -540,6 +540,67 @@ form .item #photos_preview img {
     box-shadow: 2px 2px 8px -2px var(--secondary-color);
     font-size: 14px;
     letter-spacing: .4px;
+}
+
+/* SHOP */
+
+.shop {
+    margin-bottom: 24px;
+}
+
+.shop h2 {
+    margin: 48px 0;
+}
+
+.shop .items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+}
+
+.shop .items .product {
+    display: grid;
+}
+
+.shop .items .product .image {
+    padding-top: 56.25%;
+
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    border-radius: 4px;
+
+    margin-bottom: 8px;
+}
+
+.shop .items .product h4 {
+    color: #1b1b1b;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: .6px;
+
+    margin: 8px 0;
+}
+
+.shop .items .product p {
+    color: #0e0e0e;
+    font-weight: 300;
+    font-size: 24px;
+
+    margin-top: 2px;
+}
+
+.shop .items .product .old-price {
+    font-size: 14px;
+    color: #999999;
+    text-decoration: line-through;
+}
+
+.shop .items .product .button {
+    margin-bottom: 0;
 }
 
 /* FOOTER */
