@@ -9,20 +9,22 @@
         
         <div class="aside-header">
               
-            <h2>Categoria</h2>
-            <p>X encontrados</p>
+            <h2>{{ terms.term }}</h2>
+            <p>{{ terms.total }} encontrados</p>
 
         </div>
 
         <nav class="nav-categories">
             
-            <h4>categorias</h4>
+            <h4>Categorias</h4>
 
             <ul>
 
-                <li><a href="#">categoria</a></li>
-                <li><a href="#">categoria</a></li>
-                <li><a href="#">categoria</a></li>
+                {% for category in categories %}
+
+                    <li><a href="/products/search?search={{ terms.term }}&category={{ category.id }}">{{ category.name }}</a></li>
+
+                {% endfor %}
 
             </ul>
         </nav>

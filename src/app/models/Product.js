@@ -54,39 +54,28 @@ module.exports = {
 
         const { search, category } = params
 
-        let query = ""
-            filterQuery = 'WHERE'
+        let query = ``,
+            filterQuery = `WHERE`
 
         if (category) {
-            filterQuery = `
-                ${ filterQuery }
-                product.category_id = ${ category_id }
-                AND
-            `
-        }
+            filterQuery = `${ filterQuery }
+                products.category_id = ${ category }
+                AND`
+            }
 
         filterQuery = `
-            ${ filterQuery }
-            product.name ilike '% ${ search } %'
-            OR product.description ilike '% ${ search } %'
+        ${ filterQuery }
+            (products.name ilike '%${ search }%'
+            OR products.description ilike '%${ search }%')
         `
-
-        let totalQuery = `(
-        
-            SELECT count(*) FROM products
-            ${ filterQuery }
-        
-        ) AS total`
 
         query = `
-            SELECT products.*, ${ totalQuery },
-                categories.name AS category_name
-            FROM products
-            LEFT JOIN ON ( categories.id = products.category_id )
-            ${ filterQuery }
-            GROUP BY products.id, categories.name
+        SELECT products.*,
+            categories.name as category_name
+        FROM products
+        LEFT JOIN categories ON ( categories.id = products.category_id )
+        ${ filterQuery }
         `
-
         return db.query(query)
     },
 
