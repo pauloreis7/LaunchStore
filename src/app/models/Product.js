@@ -50,6 +50,46 @@ module.exports = {
 
     },
 
+    search (params) {
+
+        const { search, category } = params
+
+        let query = ""
+            filterQuery = 'WHERE'
+
+        if (category) {
+            filterQuery = `
+                ${ filterQuery }
+                product.category_id = ${ category_id }
+                AND
+            `
+        }
+
+        filterQuery = `
+            ${ filterQuery }
+            product.name ilike '% ${ search } %'
+            OR product.description ilike '% ${ search } %'
+        `
+
+        let totalQuery = `(
+        
+            SELECT count(*) FROM products
+            ${ filterQuery }
+        
+        ) AS total`
+
+        query = `
+            SELECT products.*, ${ totalQuery },
+                categories.name AS category_name
+            FROM products
+            LEFT JOIN ON ( categories.id = products.category_id )
+            ${ filterQuery }
+            GROUP BY products.id, categories.name
+        `
+
+        return db.query(query)
+    },
+
     update(data) {
 
         const query = `

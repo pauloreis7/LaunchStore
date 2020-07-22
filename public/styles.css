@@ -603,6 +603,60 @@ form .item #photos_preview img {
     margin-bottom: 0;
 }
 
+/* SEARCH PAGE */
+
+.search-products {
+    display: grid;
+    grid-template-columns: 188px 1fr;
+    gap: 8px;
+
+    margin-top: 48px;
+}
+
+.search-products .aside-header {
+    margin-bottom: 32px;
+
+    font-size: 14px;
+    color: #333;
+}
+
+.search-products .aside-header h2 {
+    font-size: 26px;
+    text-transform: capitalize;
+    letter-spacing: .6px;
+
+    margin-bottom: 8px;
+}
+
+.search-products .nav-categories h4 {
+    margin-bottom: 16px;
+
+    color: #333;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.search-products .nav-categories ul li {
+    margin: 8px 0;
+
+    text-transform: capitalize;
+}
+
+.search-products .nav-categories ul li a {
+    margin-left: 2px;
+    
+    color: #777;
+}
+
+.search-products .nav-categories ul li a:hover {
+    margin-left: 3px;
+    
+    font-weight: 500;
+
+    transition: 200ms;
+}
+
 /* FOOTER */
 
 footer {
