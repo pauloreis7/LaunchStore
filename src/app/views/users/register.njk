@@ -2,19 +2,19 @@
 
 {% block content %}
 
-    <section class="container form">
+    <section class="user-register container form">
 
-        <form action="/products" method="post" enctype="multipart/form-data">
+        <form action="/users/register" method="post">
 
             <div class="header">
 
-                <h3>Cadastrar novo Produto</h3>
+                <h3>Cadastre-se</h3>
 
             </div>
 
             <article class="fields">
 
-                {% include 'products/fields.njk' %}
+                {% include 'users/fields.njk' %}
 
             </article>
 
