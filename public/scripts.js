@@ -16,6 +16,37 @@ const Mask = {
             style: 'currency', 
             currency: 'BRL' 
         }).format(value/100)
+    },
+
+    formatCpfOrCnpj(value) {
+        // 11.222.333/4444-
+
+        value = value.replace(/\D/g, "")
+
+        if (value.length > 14) value = value.slice(0, -1)
+
+        if (value.length > 11) {
+            
+            value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d)/, "$1.$2.$3/$4-$5")
+
+        } else {
+
+            value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")            
+        }
+
+        return value
+    },
+
+    formatCep(value) {
+        // 12345-123
+        
+        value = value.replace(/\D/g, "")
+
+        if(value.length > 8 ) value = value.slice(0, -1)
+
+        value = value.replace(/(\d{5})(\d{3})/, "$1-$2")
+
+        return value
     }
 }
 
@@ -163,5 +194,39 @@ const LightBox = {
     close() {
         LightBox.target.style.opacity = 0
         LightBox.target.style.top = "-100%"
+    }
+}
+
+const Validate = {
+    apply(input, func) {
+        Validate.clearErrorsMensages(input)
+        
+        let results = Validate[func] (input.value)
+
+        if (results) Validate.displayError(input, results)
+    },
+
+    displayError(input, error) {
+        const errorMensageContainer = document.createElement('div')
+        errorMensageContainer.classList.add('error')
+        errorMensageContainer.innerHTML = error
+        input.parentNode.appendChild(errorMensageContainer)
+
+        input.focus()
+    },
+    
+    clearErrorsMensages(input) {
+        const errorContainer = input.parentNode.querySelector('.error')
+
+        if(errorContainer) errorContainer.remove()
+    },
+
+    isEmail(value) {
+        let error = null
+        const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+        if (!value.match(mailFormat)) error = "Email inválido!!"
+
+        return error
     }
 }

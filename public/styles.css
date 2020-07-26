@@ -678,6 +678,19 @@ form .item #photos_preview img {
     max-width: 60%;
 }
 
+/* VALIDATE ERRORS */
+
+.input .error {
+    background-color: #e74c3c;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    
+    padding: 6px 10px;
+
+    max-width: 60%;
+}
+
 /* FOOTER */
 
 footer {

@@ -16,7 +16,9 @@
 
     <div class="input">
 
-        <input type="email" name="email" value="{{ user.email }}" placeholder="@gmail.com" />
+        <input type="email" name="email" value="{{ user.email }}" placeholder="@gmail.com"
+            onblur= "Validate.apply(this, 'isEmail')"
+        />
 
     </div>
 
@@ -56,7 +58,9 @@
 
     <div class="input">
 
-        <input name="cpf_cnpj" value="{{ user.cpf_cnpj }}" placeholder="Coloque seu CPF ou CNPJ" />
+        <input name="cpf_cnpj" value="{{ user.cpf_cnpj }}" placeholder="Coloque seu CPF ou CNPJ"
+            onkeydown = "Mask.apply(this, 'formatCpfOrCnpj')"
+         />
 
     </div>
 
@@ -68,7 +72,9 @@
 
     <div class="input">
 
-        <input name="cep" value="{{ user.cep }}" placeholder="99999-999" />
+        <input name="cep" value="{{ user.cep }}" placeholder="99999-999"
+            onkeydown = "Mask.apply(this, 'formatCep')"
+        />
 
     </div>
 
