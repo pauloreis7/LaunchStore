@@ -4,7 +4,7 @@
 
     <div class="input">
 
-        <input name="name" value="{{ user.name }}" placeholder="Seu nome completo" />
+        <input name="name" value="{{ user.name }}" placeholder="Seu nome completo" required />
 
     </div>
 
@@ -16,7 +16,7 @@
 
     <div class="input">
 
-        <input type="email" name="email" value="{{ user.email }}" placeholder="@gmail.com"
+        <input type="email" name="email" value="{{ user.email }}" placeholder="@gmail.com" required
             onblur= "Validate.apply(this, 'isEmail')"
         />
 
@@ -30,7 +30,7 @@
 
     <div class="input">
 
-        <input type="password" name="password" value="{{ user.password }}" placeholder="Escolha um senha segura" />
+        <input type="password" name="password" value="{{ user.password }}" placeholder="Escolha um senha segura" required />
 
     </div>
 
@@ -44,7 +44,7 @@
 
         <div class="input">
 
-            <input type="password" name="repeatPassword" placeholder="Repita a senha inserida" />
+            <input type="password" name="repeatPassword" placeholder="Repita a senha inserida" required />
 
         </div>
 
@@ -60,6 +60,8 @@
 
         <input name="cpf_cnpj" value="{{ user.cpf_cnpj }}" placeholder="Coloque seu CPF ou CNPJ"
             onkeydown = "Mask.apply(this, 'formatCpfOrCnpj')"
+            onblur = "Validate.apply(this, 'isCpfOrCnpj')"
+            required
          />
 
     </div>
@@ -74,6 +76,8 @@
 
         <input name="cep" value="{{ user.cep }}" placeholder="99999-999"
             onkeydown = "Mask.apply(this, 'formatCep')"
+            onblur = "Validate.apply(this, 'isCep')"
+            required
         />
 
     </div>
@@ -86,7 +90,7 @@
 
     <div class="input">
 
-        <input name="address" value="{{ user.address }}" placeholder="Insira seu endereço completo" />
+        <input name="address" value="{{ user.address }}" placeholder="Insira seu endereço completo" required />
 
     </div>
 

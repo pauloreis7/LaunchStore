@@ -4,6 +4,8 @@ const routes = express.Router()
 const section = require('../app/controllers/section')
 const users = require('../app/controllers/users')
 
+const Validator = require('../app/validators/user')
+
 // routes.get('/login', section.loginForm)
 
 // routes.post('/login', section.login)
@@ -23,7 +25,7 @@ const users = require('../app/controllers/users')
 // // User
 routes.get('/register', users.create)
 
-// routes.post('/register', users.post)
+routes.post('/register',Validator.post, users.post)
 
 // routes.get('/', users.show)
 

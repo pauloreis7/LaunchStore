@@ -19,7 +19,7 @@ const Mask = {
     },
 
     formatCpfOrCnpj(value) {
-        // 11.222.333/4444-
+        // 11.222.333/4444-55
 
         value = value.replace(/\D/g, "")
 
@@ -44,7 +44,7 @@ const Mask = {
 
         if(value.length > 8 ) value = value.slice(0, -1)
 
-        value = value.replace(/(\d{5})(\d{3})/, "$1-$2")
+        value = value.replace(/(\d{5})(\d{2})/, "$1-$2")
 
         return value
     }
@@ -227,6 +227,31 @@ const Validate = {
 
         if (!value.match(mailFormat)) error = "Email inválido!!"
 
+        return error
+    },
+
+    isCpfOrCnpj(value) {
+        let error = null
+
+        const clearedValues = value.replace(/\D/g , "")
+
+        if (clearedValues.length > 11 && clearedValues.length !== 14) {
+            error = "CNPJ Inválido!!"
+        }
+        else if (clearedValues.length < 12 && clearedValues.length !== 11) {
+            error = "CPF Inválido"
+        }
+
+        return error
+    },
+
+    isCep(value) {
+        let error = null
+
+        const clearedValues = value.replace(/\D/g, "")
+
+        if (clearedValues.length !== 8) error = "CEP Inválido!!"
+        
         return error
     }
 }
