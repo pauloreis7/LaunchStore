@@ -8,14 +8,13 @@
 
         {% block head %} <title>LaunchStore</title> {% endblock %}
 
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-
-       <link rel="stylesheet" href="/styles.css" />
+        {% include 'parts/styles.njk' %}
 
     </head>
 
     <body>
+
+        {% include 'parts/messages.njk' %}
         
         {% include 'parts/header.njk' %}
 

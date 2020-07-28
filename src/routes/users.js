@@ -27,7 +27,7 @@ routes.get('/register', users.create)
 
 routes.post('/register',Validator.post, users.post)
 
-// routes.get('/', users.show)
+routes.get('/', users.show)
 
 // routes.put('/', users.put)
 
