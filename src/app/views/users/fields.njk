@@ -30,7 +30,15 @@
 
     <div class="input">
 
-        <input type="password" name="password" placeholder="Escolha um senha segura" required />
+        {% if not user.id %}
+
+            <input type="password" name="password" placeholder="Escolha um senha segura" required />
+
+        {% else %}
+
+            <input type="password" name="password" placeholder="Digite sua senha para atualizar a conta" required />
+
+        {% endif %}
 
     </div>
 
@@ -44,7 +52,7 @@
 
         <div class="input">
 
-            <input type="password" name="repeatPassword" placeholder="Repita a senha inserida" required />
+            <input type="password" name="repeatPassword" placeholder="Repita a senha usada" required />
 
         </div>
 

@@ -25,11 +25,11 @@ const Validator = require('../app/validators/user')
 // // User
 routes.get('/register', users.create)
 
-routes.post('/register',Validator.post, users.post)
+routes.post('/register', Validator.post, users.post)
 
-routes.get('/', users.show)
+routes.get('/', Validator.show, users.show)
 
-// routes.put('/', users.put)
+routes.put('/', Validator.put, users.put)
 
 // routes.delete("/", users.delete)
 

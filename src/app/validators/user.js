@@ -1,18 +1,25 @@
 const User = require('../models/User')
+const { compare } = require('bcryptjs')
 
-async function post(req, res, next) {
+function checkAllField(body) {
     
-    const keys = Object.keys(req.body)
+    const keys = Object.keys(body)
 
     for (key of keys) {
-        if(req.body[key] == "") {
-            return res.render('users/register', {
-                error: 'Por Favor preencha todos os campos!!',
-                user: req.body
-            })
+        if(body[key] == "") {
+            return {
+                error: 'Por Favor, preencha todos os campos!!',
+                user: body
+            }
         }
     }
+}
 
+async function post(req, res, next) {
+
+    const notFillAllFields = checkAllField(req.body)
+    if(notFillAllFields) return res.render('user/register', notFillAllFields)
+    
     let {email, cpf_cnpj, password, repeatPassword} = req.body
 
     cpf_cnpj = cpf_cnpj.replace(/\D/g, "")
@@ -37,6 +44,50 @@ async function post(req, res, next) {
     next()
 }
 
+async function show(req, res, next) {
+    const { userId: id } = req.session
+
+    const user = await User.findOne({ where: {id} })
+
+    if (!user) return res.render('users/register', {
+        error: "Esse usuário não existe!!"
+    })
+
+    req.user = user
+
+    next()
+}
+
+async function put(req, res, next) {
+    
+    const { id, password } = req.body
+
+    if(!password) return res.render('users/index', {
+        error: "Coloque a senha para atualizar seu cadastro!",
+        user: req.body
+    })
+
+    const notFillAllFields = checkAllField(req.body)
+    if(notFillAllFields) return res.render('users/index', notFillAllFields)
+
+    const user = await User.findOne({
+        where: {id}
+    })
+
+    const passed = await compare(password, user.password)
+
+    if(!passed) return res.render('users/index', {
+        error: "Senha incorreta!!",
+        user: req.body
+    })
+
+    req.user = user
+
+    next()
+}
+
 module.exports = {
-    post
+    post,
+    show,
+    put
 }
