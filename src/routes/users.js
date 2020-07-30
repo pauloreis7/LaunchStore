@@ -4,12 +4,15 @@ const routes = express.Router()
 const section = require('../app/controllers/section')
 const users = require('../app/controllers/users')
 
-const Validator = require('../app/validators/user')
+const UserValidator = require('../app/validators/user')
+const SessionValidator = require('../app/validators/session') 
+
+const { loggedRedirectToUser, onlyUsers } = require('../app/middlewares/session')
 
 // Session
-// routes.get('/login', section.loginForm)
+routes.get('/login', loggedRedirectToUser,section.loginForm)
 
-// routes.post('/login', section.login)
+routes.post('/login', SessionValidator.login, section.login)
 
 routes.post('/logout', section.logout)
 
@@ -25,11 +28,11 @@ routes.post('/logout', section.logout)
 // User
 routes.get('/register', users.create)
 
-routes.post('/register', Validator.post, users.post)
+routes.post('/register', UserValidator.post, users.post)
 
-routes.get('/', Validator.show, users.show)
+routes.get('/', onlyUsers, UserValidator.show, users.show)
 
-routes.put('/', Validator.put, users.put)
+routes.put('/', UserValidator.put, users.put)
 
 // routes.delete("/", users.delete)
 

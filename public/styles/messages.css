@@ -23,6 +23,8 @@
     display: flex;
     justify-content: center;
 
+    z-index: 100;
+
     opacity: 1;
     animation: hidemessage 450ms ease-out 5s forwards;
 }

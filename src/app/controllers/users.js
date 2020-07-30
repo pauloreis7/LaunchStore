@@ -4,7 +4,7 @@ const { formatCpfOrCnpj, formatCep } = require("../../lib/utils")
 module.exports = {
     
     create(req, res) {
-        return res.render('users/register', {user: true})
+        return res.render('users/register')
     },
 
     async post(req, res) {
