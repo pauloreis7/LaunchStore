@@ -6,14 +6,14 @@ const users = require('../app/controllers/users')
 
 const Validator = require('../app/validators/user')
 
+// Session
 // routes.get('/login', section.loginForm)
 
 // routes.post('/login', section.login)
 
-// routes.post('/logout', section.logout)
+routes.post('/logout', section.logout)
 
-// // forgot password
-
+// Forgot password
 // routes.get('/forgot-password', section.forgotForm)
 
 // routes.get('/password-reset', section.resetForm)
@@ -22,7 +22,7 @@ const Validator = require('../app/validators/user')
 
 // routes.post('/password-reset', section.reset)
 
-// // User
+// User
 routes.get('/register', users.create)
 
 routes.post('/register', Validator.post, users.post)
