@@ -17,11 +17,11 @@ routes.post('/login', SessionValidator.login, section.login)
 routes.post('/logout', section.logout)
 
 // Forgot password
-// routes.get('/forgot-password', section.forgotForm)
+routes.get('/forgot-password', section.forgotForm)
 
 // routes.get('/password-reset', section.resetForm)
 
-// routes.post('/forgot-password', section.forgot)
+routes.post('/forgot-password', SessionValidator.forgot, section.forgot)
 
 // routes.post('/password-reset', section.reset)
 
