@@ -50,7 +50,50 @@ async function forgot(req, res, next) {
     }
 }
 
+async function reset(req, res, next) {
+
+    const { email, password, passwordRepeat, token } = req.body
+
+    const user = await User.findOne({ where: { email } })
+
+    // catch if user exists
+    if(!user) return res.render('session/reset-password', {
+        error: "Esse usuário não existe!!",
+        user: req.body,
+        token
+    })
+
+    // verify if new passwords match
+    if (password != passwordRepeat) return res.render('session/reset-password', {
+        error: "A senha e a repetição de senha devem ser iguais!!",
+        user: req.body,
+        token
+    })
+
+    // verify if token match
+    if(token != user.reset_token) return res.render('session/reset-password', {
+        error: "Sua chave para mudar senha está inválida!! Requisite uma nova recuperação",
+        user: req.body,
+        token
+    })
+
+    // verify if token expired
+    let now = new Date()
+    now = now.setHours( now.getHours() )
+
+    if(now > user.reset_token_expires) return res.render('session/reset-password', {
+        error: "Sua chave expirou!! Requisite uma nova recuperação",
+        user: req.body,
+        token
+    })
+
+    req.user = user
+    
+    next()
+}
+
 module.exports = {
     login,
-    forgot
+    forgot,
+    reset
 }

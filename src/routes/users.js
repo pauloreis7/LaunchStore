@@ -19,11 +19,11 @@ routes.post('/logout', section.logout)
 // Forgot password
 routes.get('/forgot-password', section.forgotForm)
 
-// routes.get('/password-reset', section.resetForm)
+routes.get('/password-reset', section.resetForm)
 
 routes.post('/forgot-password', SessionValidator.forgot, section.forgot)
 
-// routes.post('/password-reset', section.reset)
+routes.post('/password-reset', SessionValidator.reset, section.reset)
 
 // User
 routes.get('/register', users.create)

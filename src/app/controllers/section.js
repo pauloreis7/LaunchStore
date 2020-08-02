@@ -1,8 +1,8 @@
 const User = require('../models/User')
-const mailto = require('../../lib/mail')
-
-const crypto = require('crypto')
 const mailer = require('../../lib/mail')
+
+const { hash } = require('bcryptjs')
+const crypto = require('crypto')
 
 module.exports = {
 
@@ -73,4 +73,39 @@ module.exports = {
             })
         }
     },
+
+    resetForm (req, res) {
+
+        return res.render("session/reset-password", { token: req.query.token })
+    },
+
+    async reset(req, res) {
+
+        const { password, token } = req.body
+        const user = req.user
+
+        try {
+
+            const newPassword = await hash(password, 8)
+
+            await User.update(user.id, {
+                password: newPassword,
+                reset_token: "",
+                reset_token_expires: ""
+            })
+
+            return res.render("session/login", {
+                success: "Senha atualizada com sucesso!! Faça seu login"
+            })
+            
+        } catch (err) {
+            console.error(err)
+
+            return res.render("session/reseat-password", {
+                error: "Algo deu errado!! Tente novamente",
+                user: req.body,
+                token
+            })
+        }
+    }
 }

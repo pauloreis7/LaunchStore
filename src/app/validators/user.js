@@ -37,7 +37,7 @@ async function post(req, res, next) {
 
     // check if password match
     if (password != repeatPassword) return res.render('users/register', {
-        error: 'As senhas devem ser iguais!!',
+        error: 'A senha e a repetição de senha devem ser iguais!!',
         user: req.body
     })
 
