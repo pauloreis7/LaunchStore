@@ -1,6 +1,8 @@
 const db = require('../../config/db')
 const { hash } = require('bcryptjs')
+const fs = require('fs')
 
+const Product = require('../models/Product')
 
 module.exports = {
 
@@ -71,7 +73,7 @@ module.exports = {
                     ${ field } = '${ fields[field] }',
                 `
             } else {
-                // last iteration
+                //  last iteration
 
                 query = ` ${ query }
                     ${ field } = '${ fields[field] }'
@@ -83,5 +85,31 @@ module.exports = {
         await db.query(query)
 
         return
+    },
+
+    async delete(id) {
+
+        let results = await db.query(`SELECT * FROM products WHERE user_id = ${ id }`)
+        const products = results.rows
+
+        const filesPromise = products.map(product => Product.file(product.id))
+        const files = await Promise.all(filesPromise)
+       
+        results = await db.query(`DELETE FROM users WHERE id = ${ id }`)
+        const user = results.rows
+
+        files.map(result => {
+            result.rows.map( file => {
+
+                try {
+
+                    fs.unlinkSync(file.path)
+
+                } catch (err) {
+                    console.error(err)
+                }
+            })
+                        
+        })
     }
 }

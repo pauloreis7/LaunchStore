@@ -34,6 +34,6 @@ routes.get('/', onlyUsers, UserValidator.show, users.show)
 
 routes.put('/', UserValidator.put, users.put)
 
-// routes.delete("/", users.delete)
+routes.delete("/", users.delete)
 
 module.exports = routes
