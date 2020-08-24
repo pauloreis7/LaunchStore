@@ -49,7 +49,6 @@ module.exports = {
     file(id) {
         
         return db.query(`SELECT * FROM files WHERE product_id = ${ id }`)
-
     },
 
     search (params) {
