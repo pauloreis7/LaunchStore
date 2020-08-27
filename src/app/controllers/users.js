@@ -17,7 +17,7 @@ module.exports = {
 
         try {
 
-            let { name, email, password, cpf_cnpj, cep, addess } = req.body
+            let { name, email, password, cpf_cnpj, cep, address } = req.body
 
             password = await hash(password, 8)
 
@@ -31,7 +31,7 @@ module.exports = {
                 password,
                 cpf_cnpj,
                 cep,
-                addess
+                address
             })
 
             req.session.userId = userId
@@ -102,13 +102,13 @@ module.exports = {
             })
 
             const filesPromise = products.map(product => Product.file(product.id))
-            const files = await Promise.all(filesPromise)
+            const filesResults = await Promise.all(filesPromise)
 
             await User.delete(req.body.id)
             req.session.destroy()
 
-            files.map(results => {
-                results.rows.map( file => {
+            filesResults.map(files => {
+                files.map( file => {
                     try {
                         unlinkSync(file.path)
                     } catch (err) {

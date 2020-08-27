@@ -77,11 +77,11 @@
 
                 <div class="price">
 
-                   {{ product.price }}
+                   {{ product.formattedPrice }}
 
-                   {% if product.price !== product.old_price %}
+                   {% if product.formattedPrice !== product.formattedOldPrice %}
 
-                        <span class="old">{{ product.old_price }}</span>
+                        <span class="old">{{ product.formattedOldPrice }}</span>
 
                    {% endif %}
 

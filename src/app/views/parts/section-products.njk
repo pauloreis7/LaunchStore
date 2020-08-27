@@ -20,11 +20,11 @@
 
                 <h4>{{ product.name }}</h4>
 
-                <p>{{ product.price }}</p>
+                <p>{{ product.formattedPrice }}</p>
 
-                {% if product.oldPrice != product.price %}
+                {% if product.formattedOldPrice != product.formattedPrice %}
 
-                    <div class="old-price">{{ product.oldPrice }}</div>
+                    <div class="old-price">{{ product.formattedOldPrice }}</div>
 
                 {% endif %}
 

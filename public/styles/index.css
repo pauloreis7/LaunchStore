@@ -572,7 +572,7 @@ form .item #photos_preview img {
 .shop .items .product .image {
     padding-top: 56.25%;
 
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
 

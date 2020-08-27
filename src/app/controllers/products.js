@@ -1,8 +1,11 @@
+const { unlinkSync } = require('fs')
+
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 const File = require('../models/File')
 
-const { formatPrice, date } = require('../../lib/utils')
+const LoadProducts = require('../services/LoadProduct')
+
 
 module.exports = {
 
@@ -48,7 +51,12 @@ module.exports = {
                 status: status || 1
             })
 
-            const filesPromise = req.files.map(file => File.create({ ...file, product_id: productId }))
+            const filesPromise = req.files.map(file => File.create({
+                product_id: productId,
+                name: file.name,
+                path: file.path
+            }))
+
             await Promise.all(filesPromise)
 
             return res.redirect(`products/${ productId }`)
@@ -63,27 +71,17 @@ module.exports = {
 
         try {
 
-            const product  = await Product.find(req.params.id)
+            const product = await LoadProducts.load("product", {
+                where: {
+                    id: req.params.id
+                }
+            })
 
-            if (!product) return res.send("Poduto não encontrado")
-
-            const {birthDate, hour, minutes} = date(product.updated_at)
-
-            product.published = {
-                birthDate,
-                hour: `${ hour }h ${ minutes }min`
-            }
-
-            product.old_price = formatPrice(product.old_price)
-            product.price = formatPrice(product.price)
-
-            let files = await Product.file(req.params.id)
-            files = files.map(file => ({
-                ...file,
-                src: `${ req.protocol }://${ req.headers.host }${ file.path.replace("public", "") }`
-            }))
-
-            return res.render("products/show", { product, files })
+            if (!product) return res.render("products/show", {
+                error: "Não encontramos o produto :("
+            })
+            
+            return res.render("products/show", { product, files: product.files })
             
         } catch (err) {
             console.error(err)
@@ -94,24 +92,19 @@ module.exports = {
 
         try {
 
-            let { id } = req.params
+            const product = await LoadProducts.load("product", {
+                where: {
+                    id: req.params.id
+                }
+            })
 
-            const product = await Product.find(id)
+            if (!product) return res.render("products/show", {
+                error: "Não encontramos o produto :("
+            })
+                        
+            const categories = await Category.findAll()
 
-            if (!product) return res.send("O produto não existe!")
-
-            product.old_price = formatPrice(product.old_price)
-            product.price = formatPrice(product.price)
-
-            const categories = await Category.all()
-
-            let files = await Product.file(id)
-
-            files = files.map(file => ({ ...file,
-                src: `${ req.protocol }://${ req.headers.host }${ file.path.replace("public", "") }`
-            }))
-
-            return res.render("products/edit", { product, categories, files })
+            return res.render("products/edit", { product, categories, files: product.files })
             
         } catch (err) {
             console.error(err)
@@ -149,8 +142,8 @@ module.exports = {
 
             if (req.body.price != req.body.old_price) {
                 const product = await Product.find(req.body.id)
-                
-                req.body.old_price = product.rows[0].old_price
+
+                req.body.old_price = product.price
             }        
 
             await Product.update(req.body.id, {
@@ -174,7 +167,17 @@ module.exports = {
 
         try {
 
+            const files = await Product.file(req.body.id)
+            
             await Product.delete(req.body.id)
+
+            files.map(file => {
+                try {
+                    unlinkSync(file.path)
+                } catch (err) {
+                    console.error(err)
+                }
+            })                 
 
             return res.redirect("/")
             
