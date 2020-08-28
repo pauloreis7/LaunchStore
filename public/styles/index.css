@@ -662,24 +662,6 @@ form .item #photos_preview img {
     transition: 200ms;
 }
 
-/* USER */
-
-/* REGISTER */
-
-.user-register.container.form {
-    max-width: 620px;
-}
-
-.user-register.container.form .item {
-    margin-bottom: 28px;
-}
-
-.form .input input[name="email"],
-.form .input input[name="cpf_cnpj"],
-.form .input input[name="cep"] {
-    max-width: 60%;
-}
-
 /* VALIDATE ERRORS */
 
 .input .error {

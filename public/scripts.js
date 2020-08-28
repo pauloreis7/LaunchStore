@@ -169,6 +169,7 @@ const PhotosUpload = {
 const ImageGallery = {
     highlight: document.querySelector('.gallery .highlight > img'),
     previews: document.querySelectorAll('.gallery-preview img'),
+
     setImage (e) {
 
         const { target } = e
@@ -253,5 +254,31 @@ const Validate = {
         if (clearedValues.length !== 8) error = "CEP Inválido!!"
         
         return error
+    },
+
+    allFields(event) {
+        let items = document.querySelectorAll(' .item input, .item select, .item textarea')
+        const updateFormAction = document.querySelector('.container.form form').action
+        
+        if(updateFormAction.includes("PUT")) {
+            const fileInput = document.querySelector('.item input#photos_input')
+            
+            items = Array.prototype.slice.call(items)
+            items.splice(3, 2)
+        }
+
+        for (item of items) {
+            if(item.value == "") {
+                const errorMessage = document.createElement('div')
+                errorMessage.classList.add("messages")
+                errorMessage.classList.add("error")
+                errorMessage.innerHTML = "Por favor preencha todos os campos!!"
+                errorMessage.style.position = "fixed"
+
+                document.querySelector('body').append(errorMessage)
+                
+                return event.preventDefault()
+            }
+        }
     }
 }

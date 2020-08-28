@@ -36,4 +36,6 @@ routes.put('/', UserValidator.put, users.put)
 
 routes.delete("/", users.delete)
 
+routes.get('/ads', users.ads)
+
 module.exports = routes

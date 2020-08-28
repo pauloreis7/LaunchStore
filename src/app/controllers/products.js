@@ -25,17 +25,7 @@ module.exports = {
     async post(req, res) {
 
         try {
-
-            const keys = Object.keys(req.body)
-
-            for (key of keys) {
-                if (req.body[key] == "") {
-                    return res.send("Porfavor, preencha todos os campos!!")
-                }
-            }
-
-            if (req.files.lenght == 0) return res.send("Por favor coloque pelo menos uma imagem!!")
-
+            
             let { category_id, name, description, old_price, price, quantity, status } = req.body
 
             price =  price.replace(/\D/g, "")
@@ -115,14 +105,6 @@ module.exports = {
         
         try {
             
-            const keys = Object.keys(req.body)
-
-            for (key of keys) {
-            if (req.body[key] == "" && key != "removed_files") {
-                    return res.send("Porfavor, preencha todos os campos!")
-                } 
-            }
-
             if (req.files.length != 0) {
                 const newFilesPromise = req.files.map(file => File.create({ ...file, product_id: req.body.id }))
                 await Promise.all(newFilesPromise)
