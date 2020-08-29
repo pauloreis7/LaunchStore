@@ -1,16 +1,11 @@
 {% extends 'layout.njk' %}
+{% import 'parts/card.njk' as cards %}
 
 {% block content %}
 
-    <section class="container form">
+    {% call cards.userCard("Cadastrar novo Produto", "container form") %}
 
         <form action="/products" method="post" enctype="multipart/form-data">
-
-            <div class="header">
-
-                <h3>Cadastrar novo Produto</h3>
-
-            </div>
 
             <article class="fields">
 
@@ -22,6 +17,6 @@
 
         </form>
 
-    </section>
+    {% endcall %}
 
 {% endblock %}

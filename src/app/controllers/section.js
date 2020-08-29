@@ -1,8 +1,10 @@
-const User = require('../models/User')
-const mailer = require('../../lib/mail')
-
 const { hash } = require('bcryptjs')
 const crypto = require('crypto')
+
+const User = require('../models/User')
+
+const mailer = require('../../lib/mail')
+
 
 module.exports = {
 

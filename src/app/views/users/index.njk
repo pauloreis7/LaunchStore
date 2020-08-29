@@ -1,17 +1,13 @@
 {% extends 'layout.njk' %}
+{% import 'parts/card.njk' as cards %}
 
 {% block content %}
 
-    <section class="user-dashboard container form">
-
+    {% call cards.userCard("Sua Conta", "user-dashboard container") %}
+  
         <form action="/users?_method=PUT" method="POST">
 
-            <div class="header">
-
-                <h3>Sua Conta</h3>
-
-            </div>
-
+            
             <div class="fields">
 
                 {% include 'users/fields.njk' %}
@@ -32,7 +28,7 @@
         
         </form>
 
-    </section>
+    {% endcall %}
 
     <script>
 

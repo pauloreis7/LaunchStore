@@ -1,0 +1,65 @@
+@keyframes showResults {
+    to {
+        opacity: 1;
+    }
+}
+
+.order-success, .order-error {
+    padding: 0 0 32px;
+    margin: auto;
+
+    text-align: center;
+    line-height: 40px;
+
+    opacity: 0;
+    animation: showResults 800ms ease-in-out 250ms forwards;
+}
+
+.order-success .success-lottie {
+    height: 200px;
+
+    margin-bottom: 16px;
+}
+
+.order-success h2 {
+    color: #39c250;
+    font-size: 32px;
+}
+
+.order-success p, .order-error p {
+    color: #a1a1a1;
+    font-size: 18px;
+}
+
+.order-success a {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.order-success a:hover {
+    filter: brightness(80%);
+
+    transition: 200ms;
+}
+
+.order-error .error-lottie {
+    height: 140px;
+
+    margin-bottom: 16px;
+}
+
+.order-error h2 {
+    color: #e74c3c;
+    font-size: 32px;
+}
+
+.order-error a {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.order-error a:hover {
+    filter: brightness(120%);
+
+    transition: 200ms;
+}

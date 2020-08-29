@@ -1,9 +1,9 @@
 {% extends 'layout.njk' %}
-
+{% import 'parts/card.njk' as cards %}
 
 {% block content %}
 
-    <section class="product-single container">
+    {% call cards.userCard("", "product-single container") %}
 
         <div class="gallery">
 
@@ -87,11 +87,17 @@
 
                 </div>
 
-                <div class="buy">
+                {% if (session.userId) and (product.user_id == session.userId) %}
+                
+                    <p class="unavailable">Seu produto</p>
 
-                    {% if product.status == 0 %}
+                {% else %}
 
-                        <p class="unavailable">Produto indisponível :(</p>
+                    <div class="buy">
+
+                        {% if product.status == 0 %}
+
+                            <p class="unavailable">Produto indisponível :(</p>
 
                         {% elseif product.quantity == 0 %}
 
@@ -99,16 +105,21 @@
 
                         {% else %}
 
-                            <button class="button">Comprar</button>
+                            <form action="/users/orders" method="post">
+                                <input type="hidden" name="id" value='{{ product.id }}' />
+                                <button class="button">Comprar</button>
+                            </form>
 
-                    {% endif %}
-                    
-                </div>
+                        {% endif %}
+                        
+                    </div>
+
+                {% endif %}
 
             </div>
 
         </article>
 
-    </section>
+    {% endcall %}
 
 {% endblock %}

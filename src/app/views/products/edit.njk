@@ -1,16 +1,11 @@
 {% extends 'layout.njk' %}
+{% import 'parts/card.njk' as cards %}
 
 {% block content %}
 
-    <section class="container form">
+    {% call cards.userCard("Editar Produto", "product-create form") %}
 
         <form action="/products?_method=PUT" method="POST" enctype="multipart/form-data">
-
-            <div class="header">
-
-                <h3>Editar Produto: {{ product.name }}</h3>
-
-            </div>
 
             <div class="fields">
 
@@ -33,7 +28,7 @@
         
         </form>
 
-    </section>
+    {% endcall %}
 
     <script>
 

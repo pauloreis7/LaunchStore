@@ -12,6 +12,10 @@
     max-width: 60%;
 }
 
+.user-dashboard {
+    max-width: 700px;
+}
+
 .users-ads {
     max-width: 700px;
 }
