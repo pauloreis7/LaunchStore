@@ -13,7 +13,7 @@
 </h2>
 
 <h1 align="center">
-    <img src=".github/cover.jpg" />
+    <img src=".github/cover.jpeg" />
 </h1>
 
 <h4 align="center">🏁 Aplicação já finalizada 🏁</h4>
@@ -45,7 +45,7 @@
 <img src=".github/login.jpeg"/>
 <img src=".github/signup.jpeg"/>
 <img src=".github/search.jpeg"/>
-<img src=".github/register_product.jpeg"/>
+<img src=".github/register_product.png"/>
 <img src=".github/show_product.jpeg"/>
 </p>
 
