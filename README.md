@@ -45,7 +45,7 @@
 <img src=".github/login.jpeg"/>
 <img src=".github/signup.jpeg"/>
 <img src=".github/search.jpeg"/>
-<img src=".github/register_product.png"/>
+<img src=".github/register_product.jpeg"/>
 <img src=".github/show_product.jpeg"/>
 </p>
 
